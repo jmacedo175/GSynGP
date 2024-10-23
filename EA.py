@@ -2,6 +2,7 @@ import random
 
 from numba import njit,jit
 from multiprocessing import Process, Queue
+import multiprocessing
 from EvaluationFunctions import *
 import time
 import os
@@ -87,6 +88,7 @@ class Individual:
 
 class EA:
     def __init__(self, pop_size, generations, ei, ri, p_cross, p_mut, tourn_size, elite_size, evaluation_function, p_reeval, lpp, pareto, log_file, genotypic_distance, compute_gp_metrics=False, compute_diversities=False, params_coefs=(1,1), maximise=False, visualize=False, instances=1, prob_type='SR'):
+        multiprocessing.set_start_method('fork', force=True)
 
         self.visualize = visualize        
         self.genotypic_distance = genotypic_distance
